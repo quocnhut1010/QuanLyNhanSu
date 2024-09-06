@@ -1,0 +1,58 @@
+﻿@model Demo1.Models.TANGCA
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+
+<div>
+    <h4 style="text-align:center; color:red">Thông tin tăng ca</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NHANVIEN.HOTEN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NHANVIEN.HOTEN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GIOBATDAU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIOBATDAU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIOKETTHUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIOKETTHUC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOGIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOGIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAY)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Trở lại", "LSTangCa")
+</p>

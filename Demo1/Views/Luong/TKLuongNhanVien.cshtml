@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "TKLuongNhanVien";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biểu đồ Tổng Tiền Nhận Của Mỗi Nhân Viên</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chart-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h1 style="text-align:center;color:red">Biểu đồ Tổng Tiền Nhận Của Mỗi Nhân Viên</h1>
+        <img src="@Model" alt="Biểu đồ Tổng Tiền Nhận Của Mỗi Nhân Viên" />
+    </div>
+</body>
+</html>
+
+

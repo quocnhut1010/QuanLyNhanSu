@@ -1,0 +1,74 @@
+﻿@model Demo1.Models.CHAMCONG
+@{
+    ViewBag.Title = "ChamCong";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>ChamCong</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>CHAMCONG</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MSNV, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.MSNV, (IEnumerable<SelectListItem>)ViewBag.EmployeeList, "Chọn nhân viên", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MSNV, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.CHAMCONG1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CHAMCONG1, new { @class = "form-control", @readonly = "readonly", @Value = "8" })
+                @Html.ValidationMessageFor(model => model.CHAMCONG1, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NGAY, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.NGAY, new { @class = "form-control", @readonly = "readonly", @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+            @Html.ValidationMessageFor(model => model.NGAY, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GIOCHAMCONG, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.GIOCHAMCONG, new { @class = "form-control", @readonly = "readonly", @Value = DateTime.Now.ToString("HH:mm:ss") })
+            @Html.ValidationMessageFor(model => model.GIOCHAMCONG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LOAI, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.LOAI, new { @class = "form-control", @readonly = "readonly", @Value = "Chính thức" })
+            @Html.ValidationMessageFor(model => model.LOAI, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

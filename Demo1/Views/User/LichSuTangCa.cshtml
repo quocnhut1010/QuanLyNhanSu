@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Demo1.Models.TANGCA>
+
+@{
+    ViewBag.Title = "LichSuTangCa";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style="text-align:center; color:red">Lịch Sử Tăng Ca</h2>
+
+<p>
+    @Html.ActionLink("Yêu cầu tăng ca", "TaoYeuCauTangCa")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NHANVIEN.HOTEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIOBATDAU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIOKETTHUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOGIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NHANVIEN.HOTEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GIOBATDAU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GIOKETTHUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SOGIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAY)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.TRANGTHAI)*@
+            @if (item.TRANGTHAI.HasValue)
+            {
+                if (item.TRANGTHAI.Value)
+                {
+                    <span style="color:green;">Đã chấp nhận</span>
+                }
+                else
+                {
+                    <span style="color:red;">Chưa xác định</span>
+                }
+            }
+            else
+            {
+                <span style="color:blue;">Không xác định</span>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Chấp thuận đề nghị", "Duyet", "TangCa", new { id = item.IDTC }, null)|
+            @Html.ActionLink("Từ chối đề nghị", "KhongDuyet", "TangCa", new { id = item.IDTC }, null)
+        </td>
+
+
+
+
+
+
+    </tr>
+}
+
+</table>
+<script>
+    $(document).ready(function () {
+        $(".action-link").click(function () {
+            if ($(this).hasClass("disabled")) {
+                alert("Bạn đã thực hiện hành động này. Vui lòng thử lại sau 30 phút.");
+                return false;
+            } else {
+                $(".action-link").addClass("disabled");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,106 @@
+﻿@model Demo1.Models.LUONG
+
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+
+<div>
+    <h4 style="text-align:center;color:red">CHI TIẾT LƯƠNG</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+            TÊN NHÂN VIÊN
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.NHANVIEN.HOTEN)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Lương cơ bản
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.LCB)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Số ngày làm
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SONGAYLAM)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                BHYT
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.BHYT)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                BHXH
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.BHXH)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                BHTN
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.BHTN)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Tổng phụ cấp
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.TONGPHUCAP)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Số giờ tăng ca
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SOGIOTANGCA)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Tổng tiền tăng ca
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.TONGTIENTANGCA)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Tổng tiền nhận
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.TONGTIENNHAN)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Tháng
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.THANG)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

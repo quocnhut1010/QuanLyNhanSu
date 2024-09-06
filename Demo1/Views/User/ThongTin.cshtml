@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "ThongTin";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CV Nhân Viên</title>
+    <style>
+        /* CSS để định dạng CV */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cv-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .cv-header {
+            text-align: center;
+        }
+
+        .cv-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .cv-section {
+            margin-bottom: 20px;
+        }
+
+            .cv-section h3 {
+                margin-bottom: 10px;
+            }
+
+            .cv-section dl {
+                display: grid;
+                grid-template-columns: auto auto;
+                gap: 10px;
+            }
+
+                .cv-section dl dt {
+                    font-weight: bold;
+                }
+
+                .cv-section dl dd {
+                    margin-left: 0;
+                }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="cv-header">
+            <h1>CV Nhân Viên</h1>
+            <img class="cv-photo" src="@Url.Content("~/img/" + Model.HINHANH)" alt="Hình ảnh nhân viên" />
+        </div>
+        <div class="cv-section">
+            <h3>Thông tin cá nhân</h3>
+            <dl>
+                <dt>Mã nhân viên:</dt>
+                <dd>@Model.MSNV</dd>
+                <dt>Họ và tên:</dt>
+                <dd>@Model.HOTEN</dd>
+                <dt>Giới tính:</dt>
+                <dd>@Model.GIOITINH</dd>
+                <dt>Ngày sinh:</dt>
+                <dd>@Model.NGAYSINH</dd>
+                <dt>Quê quán:</dt>
+                <dd>@Model.QUEQUAN</dd>
+                <dt>Tạm trú:</dt>
+                <dd>@Model.TAMTRU</dd>
+                <dt>SDT:</dt>
+                <dd>@Model.SDT</dd>
+                <dt>Email:</dt>
+                <dd>@Model.EMAIL</dd>
+                <dt>Dân tộc:</dt>
+                <dd>@Model.DANTOC</dd>
+                <dt>Học vấn:</dt>
+                <dd>@Model.HOCVAN</dd>
+                <dt>CCCD:</dt>
+                <dd>@Model.CCCD</dd>
+            </dl>
+        </div>
+        <!-- Thêm các phần thông tin khác của CV tại đây -->
+    </div>
+</body>
+</html>

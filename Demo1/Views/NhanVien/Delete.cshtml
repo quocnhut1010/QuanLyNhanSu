@@ -1,0 +1,16 @@
+﻿@model Demo1.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Xác nhận xóa nhân viên";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2>Xác nhận xóa nhân viên</h2>
+
+<p>Bạn có chắc chắn muốn xóa nhân viên "<strong>@Model.HOTEN</strong>" không?</p>
+
+<form action="@Url.Action("Delete", "NhanVien", new { id = Model.MSNV })" method="post">
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Xóa" class="btn btn-danger" />
+    <a href="@Url.Action("Index", "NhanVien")" class="btn btn-default">Hủy bỏ</a>
+</form>

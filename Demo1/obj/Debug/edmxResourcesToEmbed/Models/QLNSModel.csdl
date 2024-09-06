@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLNVCTYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ADMIN">
+    <Key>
+      <PropertyRef Name="MAADMIN" />
+    </Key>
+    <Property Name="MAADMIN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MATKHAU" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CHAMCONG">
+    <Key>
+      <PropertyRef Name="IDCC" />
+    </Key>
+    <Property Name="IDCC" Type="Int32" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NGAY" Type="DateTime" Precision="0" />
+    <Property Name="GIOCHAMCONG" Type="Time" Precision="7" />
+    <Property Name="LOAI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__CHAMCONG__MSNV__71D1E811" FromRole="CHAMCONG" ToRole="NHANVIEN" />
+  </EntityType>
+  <EntityType Name="CHUCVU">
+    <Key>
+      <PropertyRef Name="IDCHUCVU" />
+    </Key>
+    <Property Name="IDCHUCVU" Type="Int32" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="VITRI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CHUCVU1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__CHUCVU__MSNV__6EF57B66" FromRole="CHUCVU" ToRole="NHANVIEN" />
+  </EntityType>
+  <EntityType Name="HOCVANKINHNGHIEM">
+    <Key>
+      <PropertyRef Name="HOCVAN" />
+    </Key>
+    <Property Name="HOCVAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="KINHNGHIEM" Type="Int32" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__HOCVANKINH__MSNV__6C190EBB" FromRole="HOCVANKINHNGHIEM" ToRole="NHANVIEN" />
+  </EntityType>
+  <EntityType Name="HOPDONGLAODONG">
+    <Key>
+      <PropertyRef Name="MAHOPDONG" />
+    </Key>
+    <Property Name="MAHOPDONG" Type="Int32" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LOAIHOPDONG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYKY" Type="DateTime" Precision="0" />
+    <Property Name="NGAYHETHAN" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__HOPDONGLAO__MSNV__7D439ABD" FromRole="HOPDONGLAODONG" ToRole="NHANVIEN" />
+    <Property Name="LUONGCOBAN" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LUONG">
+    <Key>
+      <PropertyRef Name="IDL" />
+    </Key>
+    <Property Name="IDL" Type="Int32" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LCB" Type="Int32" />
+    <Property Name="SONGAYLAM" Type="Int32" />
+    <Property Name="BHYT" Type="Int32" />
+    <Property Name="BHXH" Type="Int32" />
+    <Property Name="BHTN" Type="Int32" />
+    <Property Name="TONGPHUCAP" Type="Int32" />
+    <Property Name="SOGIOTANGCA" Type="Int32" />
+    <Property Name="TONGTIENTANGCA" Type="Int32" />
+    <Property Name="TONGTIENNHAN" Type="Int32" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__LUONG__MSNV__74AE54BC" FromRole="LUONG" ToRole="NHANVIEN" />
+    <Property Name="THANG" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="NHANVIEN">
+    <Key>
+      <PropertyRef Name="MSNV" />
+    </Key>
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HOTEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GIOITINH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYSINH" Type="DateTime" Precision="0" />
+    <Property Name="HINHANH" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="QUEQUAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TAMTRU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DANTOC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HOCVAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYVAOLAM" Type="DateTime" Precision="0" />
+    <Property Name="CCCD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MSHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CHAMCONGs" Relationship="Self.FK__CHAMCONG__MSNV__71D1E811" FromRole="NHANVIEN" ToRole="CHAMCONG" />
+    <NavigationProperty Name="CHUCVUs" Relationship="Self.FK__CHUCVU__MSNV__6EF57B66" FromRole="NHANVIEN" ToRole="CHUCVU" />
+    <NavigationProperty Name="HOCVANKINHNGHIEMs" Relationship="Self.FK__HOCVANKINH__MSNV__6C190EBB" FromRole="NHANVIEN" ToRole="HOCVANKINHNGHIEM" />
+    <NavigationProperty Name="HOPDONGLAODONGs" Relationship="Self.FK__HOPDONGLAO__MSNV__7D439ABD" FromRole="NHANVIEN" ToRole="HOPDONGLAODONG" />
+    <NavigationProperty Name="LUONGs" Relationship="Self.FK__LUONG__MSNV__74AE54BC" FromRole="NHANVIEN" ToRole="LUONG" />
+    <NavigationProperty Name="QUANLYNGHIPHEPs" Relationship="Self.FK__QUANLYNGHI__MSNV__7A672E12" FromRole="NHANVIEN" ToRole="QUANLYNGHIPHEP" />
+    <NavigationProperty Name="TANGCAs" Relationship="Self.FK__TANGCA__MSNV__778AC167" FromRole="NHANVIEN" ToRole="TANGCA" />
+  </EntityType>
+  <EntityType Name="QUANLYNGHIPHEP">
+    <Key>
+      <PropertyRef Name="MANP" />
+    </Key>
+    <Property Name="MANP" Type="Int32" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="LOAINGHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYBATDAU" Type="DateTime" Precision="0" />
+    <Property Name="NGAYKETTHUC" Type="DateTime" Precision="0" />
+    <Property Name="SONGAYNGHI" Type="Int32" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__QUANLYNGHI__MSNV__7A672E12" FromRole="QUANLYNGHIPHEP" ToRole="NHANVIEN" />
+    <Property Name="TRANGTHAI" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TANGCA">
+    <Key>
+      <PropertyRef Name="IDTC" />
+    </Key>
+    <Property Name="IDTC" Type="Int32" Nullable="false" />
+    <Property Name="MSNV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="GIOBATDAU" Type="Time" Precision="7" />
+    <Property Name="GIOKETTHUC" Type="Time" Precision="7" />
+    <Property Name="SOGIO" Type="Int32" />
+    <Property Name="NGAY" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__TANGCA__MSNV__778AC167" FromRole="TANGCA" ToRole="NHANVIEN" />
+    <Property Name="TRANGTHAI" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__CHAMCONG__MSNV__71D1E811">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="CHAMCONG" Type="Self.CHAMCONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="CHAMCONG">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CHUCVU__MSNV__6EF57B66">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="CHUCVU">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HOCVANKINH__MSNV__6C190EBB">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="HOCVANKINHNGHIEM" Type="Self.HOCVANKINHNGHIEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="HOCVANKINHNGHIEM">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HOPDONGLAO__MSNV__7D439ABD">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="HOPDONGLAODONG" Type="Self.HOPDONGLAODONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="HOPDONGLAODONG">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LUONG__MSNV__74AE54BC">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="LUONG" Type="Self.LUONG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="LUONG">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__QUANLYNGHI__MSNV__7A672E12">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="QUANLYNGHIPHEP" Type="Self.QUANLYNGHIPHEP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="QUANLYNGHIPHEP">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TANGCA__MSNV__778AC167">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="TANGCA" Type="Self.TANGCA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="MSNV" />
+      </Principal>
+      <Dependent Role="TANGCA">
+        <PropertyRef Name="MSNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLNVCTYEntities6" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
+    <EntitySet Name="CHAMCONGs" EntityType="Self.CHAMCONG" />
+    <EntitySet Name="CHUCVUs" EntityType="Self.CHUCVU" />
+    <EntitySet Name="HOCVANKINHNGHIEMs" EntityType="Self.HOCVANKINHNGHIEM" />
+    <EntitySet Name="HOPDONGLAODONGs" EntityType="Self.HOPDONGLAODONG" />
+    <EntitySet Name="LUONGs" EntityType="Self.LUONG" />
+    <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
+    <EntitySet Name="QUANLYNGHIPHEPs" EntityType="Self.QUANLYNGHIPHEP" />
+    <EntitySet Name="TANGCAs" EntityType="Self.TANGCA" />
+    <AssociationSet Name="FK__CHAMCONG__MSNV__71D1E811" Association="Self.FK__CHAMCONG__MSNV__71D1E811">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="CHAMCONG" EntitySet="CHAMCONGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CHUCVU__MSNV__6EF57B66" Association="Self.FK__CHUCVU__MSNV__6EF57B66">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="CHUCVU" EntitySet="CHUCVUs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HOCVANKINH__MSNV__6C190EBB" Association="Self.FK__HOCVANKINH__MSNV__6C190EBB">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="HOCVANKINHNGHIEM" EntitySet="HOCVANKINHNGHIEMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HOPDONGLAO__MSNV__7D439ABD" Association="Self.FK__HOPDONGLAO__MSNV__7D439ABD">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="HOPDONGLAODONG" EntitySet="HOPDONGLAODONGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LUONG__MSNV__74AE54BC" Association="Self.FK__LUONG__MSNV__74AE54BC">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="LUONG" EntitySet="LUONGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__QUANLYNGHI__MSNV__7A672E12" Association="Self.FK__QUANLYNGHI__MSNV__7A672E12">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="QUANLYNGHIPHEP" EntitySet="QUANLYNGHIPHEPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TANGCA__MSNV__778AC167" Association="Self.FK__TANGCA__MSNV__778AC167">
+      <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+      <End Role="TANGCA" EntitySet="TANGCAs" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="QLNVCTYModel.sysdiagram" />
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

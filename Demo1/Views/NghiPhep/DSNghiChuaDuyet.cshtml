@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Demo1.Models.QUANLYNGHIPHEP>
+
+@{
+    ViewBag.Title = "DSNghiChuaDuyet";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2 style="text-align:center; color:red">Danh Sách Nghỉ Chưa Duyệt</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NHANVIEN.HOTEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOAINGHI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAYBATDAU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAYKETTHUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SONGAYNGHI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NHANVIEN.HOTEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOAINGHI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAYBATDAU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAYKETTHUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SONGAYNGHI)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.TRANGTHAI)*@
+            @if (item.TRANGTHAI.HasValue)
+            {
+                if (item.TRANGTHAI.Value)
+                {
+                    <span style="color:green;">Đã chấp nhận</span>
+                }
+                else
+                {
+                    <span style="color:red;">Chưa xác định</span>
+                }
+            }
+            else
+            {
+                <span style="color:blue;">Đang xử lí</span>
+            }
+        </td>
+
+        <td>
+            @Html.ActionLink("Duyệt", "DuyetNghiPhep", new { id = item.MANP })
+        </td>
+    </tr>
+}
+
+</table>

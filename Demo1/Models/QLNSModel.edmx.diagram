@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87fe6720fa0940f79925bc256ad8f091" Name="Diagram1">
+        <EntityTypeShape EntityType="QLNVCTYModel.ADMIN" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.CHAMCONG" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.CHUCVU" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.HOCVANKINHNGHIEM" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.HOPDONGLAODONG" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.LUONG" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.QUANLYNGHIPHEP" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNVCTYModel.TANGCA" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
+        <AssociationConnector Association="QLNVCTYModel.FK__CHAMCONG__MSNV__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNVCTYModel.FK__CHUCVU__MSNV__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNVCTYModel.FK__HOCVANKINH__MSNV__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNVCTYModel.FK__HOPDONGLAO__MSNV__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNVCTYModel.FK__LUONG__MSNV__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNVCTYModel.FK__QUANLYNGHI__MSNV__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNVCTYModel.FK__TANGCA__MSNV__778AC167" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

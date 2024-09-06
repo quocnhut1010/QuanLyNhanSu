@@ -1,0 +1,109 @@
+﻿@using Demo1.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<Demo1.Models.TANGCA>
+
+@{
+    ViewBag.Title = "LSTangCa";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2 style="text-align:center;color:red">Danh Sách Tăng Ca</h2>
+
+<table class="table">
+    <tr>
+        <th style="text-align:center" ; width="100px">
+            Họ Tên
+        </th>
+        <th style="text-align:center" ; width="100px">
+            Giờ bắt đầu
+        </th>
+        <th style="text-align:center" ; width="100px">
+            Giờ kết thúc
+        </th>
+        <th style="text-align:center" ; width="100px">
+            Số giờ
+        </th>
+        <th style="text-align:center" ; width="100px">
+            Ngày
+        </th>
+        <th style="text-align:center" ; width="100px">
+            Trạng thái 
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.NHANVIEN.HOTEN)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.GIOBATDAU)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.GIOKETTHUC)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.SOGIO)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.NGAY)
+            </td>
+            <td style="text-align:center">
+                @*@Html.DisplayFor(modelItem => item.TRANGTHAI)*@
+                @if (item.TRANGTHAI.HasValue)
+                {
+                    if (item.TRANGTHAI.Value)
+                    {
+                        <span style="color:green;">Đã chấp nhận</span>
+                    }
+                    else
+                    {
+                        <span style="color:red;">Chưa xác định</span>
+                    }
+                }
+                else
+                {
+                    <span style="color:blue;">Đang xử lí</span>
+                }
+
+            </td>
+            
+
+
+            <td style="text-align:center">
+                <a href="@Url.Action("Details", new { id = item.IDTC })" class="btn btn-primary" role="button"
+                   style="background-color: #007bff; color: #fff; font-size: 15px">Chi tiết</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+Trang @(Model.PageCount < Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+<div class="Menu">
+    @Html.PagedListPager(Model, page => Url.Action("LSTangCa", new { page = page }))
+</div>
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+            .pagination a.active {
+                background-color: #f9b536;
+                color: #fff;
+            }
+</style>

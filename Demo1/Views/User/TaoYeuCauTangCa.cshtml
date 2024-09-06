@@ -1,0 +1,57 @@
+﻿@model Demo1.Models.TANGCA
+
+@{
+    ViewBag.Title = "TaoYeuCauTangCa1";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Tạo Yêu Cầu Tăng Ca</h2>
+
+@using (Html.BeginForm("TaoYeuCauTangCa", "User", FormMethod.Post))
+{
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Yêu Cầu Tăng Ca</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MSNV, "Mã số nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.MSNV, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Giờ bắt đầu", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("gioBatDau", new SelectList(new[] { "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }), "Chọn giờ", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Giờ kết thúc", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("gioKetThuc", new SelectList(new[] { "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }), "Chọn giờ", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NGAY, "Ngày", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NGAY, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Tạo yêu cầu" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "TongLuongCanTra";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .chart-container {
+        text-align: center;
+    }
+</style>
+@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earnings Overview</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align:center; color:red">TỔNG LƯƠNG ĐÃ TRẢ QUA HÀNG THÁNG</h1>
+        <img src="@Model" alt="Earnings Overview Chart" />
+    </div>
+</body>
+</html>
+
+

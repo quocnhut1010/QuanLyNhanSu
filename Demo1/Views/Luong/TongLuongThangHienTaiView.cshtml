@@ -1,0 +1,7 @@
+﻿@{
+    ViewBag.Title = "TongLuongThangHienTaiView";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2>Tổng lương tháng hiện tại</h2>
+Tổng lương tháng này (Monthly): @(Convert.ToDecimal(ViewBag.TongLuongThangHienTai).ToString("N0")) VND <!-- Hiển thị giá trị từ ViewBag -->

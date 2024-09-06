@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2>Tổng quan về công ty</h2>
+<div class="container container-bg" style="background-image:url(../../img/cty1.jpg); background-size: cover; background-position: center; color: white;">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 px-0">
+            <div class="map_container">
+                <div class="map-responsive">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.780748297073!2d106.67059877068077!3d10.979915165271517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d1afa65b1d3b%3A0x31155d219ba1ed06!2zRS1MZWFybmluZyAtIMSQ4bqhaSBo4buNYyBUaOG7pyBE4bqndSBN4buZdA!5e0!3m2!1svi!2s!4v1700622608308!5m2!1svi!2s" width="600px" height="400px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 px-0">
+            <div class="company-overview" style="padding: 20px;">
+                <h3>Thông tin tổng quan</h3>
+                <p><strong>Tên công ty:</strong> Công ty TNHH RIUS</p>
+                <p><strong>Địa chỉ:</strong> 06 Trần Văn Ơn, Phú Hoà, Thủ Dầu Một, Bình Dương , Việt Nam</p>
+                <p><strong>Số điện thoại:</strong> (+84) 1234 5678</p>
+                <p><strong>Email:</strong> contact@rius.com</p>
+                <p><strong>Lĩnh vực hoạt động:</strong> Công nghệ thông tin, Phần mềm, Dịch vụ tư vấn</p>
+                <p><strong>Thành lập:</strong> Năm 2020</p>
+                <p><strong>Quy mô:</strong> 200 nhân viên</p>
+                <p><strong>Mã số thuế:</strong> 0199999999 - 001</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container-bg {
+        background-image: url(../../img/cty1.jpg);
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 10px;
+        height:700px;
+        width:2500px;
+    }
+
+    .company-overview {
+        background: rgba(0, 0, 0, 0.5); /* Optional: To make text more readable */
+        padding: 20px;
+        border-radius: 10px;
+    }
+</style>

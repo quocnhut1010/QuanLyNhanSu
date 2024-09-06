@@ -1,0 +1,58 @@
+﻿@model Demo1.Models.QUANLYNGHIPHEP
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<div class="container">
+    <h4 style="text-align:center; color:red">Chi Tiết Nghỉ Phép</h4>
+    <hr />
+    <table class="table table-bordered">
+        <tr>
+            <th>Mã Nhân Viên</th>
+            <td>@Html.DisplayFor(model => model.MSNV)</td>
+        </tr>
+        <tr>
+            <th>Họ và Tên</th>
+            <td>@Html.DisplayFor(model => model.NHANVIEN.HOTEN)</td>
+        </tr>
+        <tr>
+            <th>Loại Nghỉ</th>
+            <td>@Html.DisplayFor(model => model.LOAINGHI)</td>
+        </tr>
+        <tr>
+            <th>Ngày Bắt Đầu</th>
+            <td>@Html.DisplayFor(model => model.NGAYBATDAU)</td>
+        </tr>
+        <tr>
+            <th>Ngày Kết Thúc</th>
+            <td>@Html.DisplayFor(model => model.NGAYKETTHUC)</td>
+        </tr>
+        <tr>
+            <th>Số Ngày Nghỉ</th>
+            <td>@Html.DisplayFor(model => model.SONGAYNGHI)</td>
+        </tr>
+        <tr>
+            <th>Trạng Thái</th>
+            <td>
+                @Html.DisplayFor(model => model.TRANGTHAI)
+            </td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("Trở lại danh sách", "Index")
+    </p>
+</div>
+
+
+@*<style>
+    .table-no-border {
+        border-collapse: collapse;
+    }
+
+        .table-no-border th,
+        .table-no-border td {
+            border: none;
+        }
+</style>*@

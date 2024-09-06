@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Demo1.Models.TANGCA>
+
+@{
+    ViewBag.Title = "LSTangCaChuaDuyet";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2 style="text-align:center; color:red">Danh sách tăng ca cần duyệt</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NHANVIEN.HOTEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIOBATDAU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIOKETTHUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOGIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN.HOTEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIOBATDAU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIOKETTHUC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOGIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAY)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.TRANGTHAI)
+            </th>
+            <td>
+                @Html.ActionLink("Duyệt", "Duyet", new { id = item.IDTC })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Thêm mã JavaScript -->
+<script>
+    $(function() {
+        // Kiểm tra xem có thông báo từ ViewBag không
+        var successMessage = '@ViewBag.SuccessMessage';
+        if (successMessage) {
+            // Hiển thị hộp thoại thông báo
+            alert(successMessage);
+        }
+    });
+</script>

@@ -1,0 +1,81 @@
+﻿@using Demo1.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<Demo1.Models.LUONG>
+@{
+    ViewBag.Title = "Quản lí lương";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2 style="text-align:center; color:red">Quản lí lương</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>TÊN NHÂN VIÊN</th>
+            <th>Lương cơ bản</th>
+            <th>Số ngày làm</th>
+            <th>BHYT</th>
+            <th>BHXH</th>
+            <th>BHTN</th>
+            <th>Tổng phụ cấp</th>
+            <th>Số giờ tăng ca</th>
+            <th>Tổng tiền tăng ca</th>
+            <th>Tổng tiền nhận</th>
+            <th>Tháng</th>
+            <th>Xem chi tiết</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NHANVIEN.HOTEN</td>
+                <td>@item.LCB</td>
+                <td>@item.SONGAYLAM</td>
+                <td>@item.BHYT</td>
+                <td>@item.BHXH</td>
+                <td>@item.BHTN</td>
+                <td>@item.TONGPHUCAP</td>
+                <td>@item.SOGIOTANGCA</td>
+                <td>@item.TONGTIENTANGCA</td>
+                <td>@(Convert.ToDecimal(item.TONGTIENNHAN).ToString("N0")) VND</td>
+                
+                <td>
+                    @if (item.THANG != null)
+                    {
+                        @item.THANG.Value.ToString("MM/yyyy")
+                    }
+                    else
+                    {
+                        <text>(Unknown)</text> <!-- Hiển thị khi giá trị là null -->
+                    }
+                </td>
+                <td>@Html.ActionLink("Xem", "XemChiTiet", new { id = item.IDL })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+            .pagination a.active {
+                background-color: #f9b536;
+                color: #fff;
+            }
+</style>

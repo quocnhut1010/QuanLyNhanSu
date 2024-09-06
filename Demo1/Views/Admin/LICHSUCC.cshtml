@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<Demo1.Models.CHAMCONG>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "LICHSUCC";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+}
+
+<h2 style="text-align:center; color:red">Danh sách chấm công</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model[0].NGAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].GIOCHAMCONG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].LOAI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].NHANVIEN.HOTEN)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIOCHAMCONG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOAI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHANVIEN.HOTEN)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div style="text-align:center;">
+    @Html.PagedListPager(Model, page => Url.Action("LICHSUCC", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "table-container" }))
+</div>
