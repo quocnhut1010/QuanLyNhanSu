@@ -1,0 +1,47 @@
+﻿@model Demo1.Models.LeaveRequestCreateModel
+
+@{
+    ViewBag.Title = "Gui don nghi phep";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var leaveTypes = ViewBag.LeaveTypes as System.Collections.Generic.IEnumerable<System.Web.Mvc.SelectListItem> ?? System.Linq.Enumerable.Empty<System.Web.Mvc.SelectListItem>();
+}
+
+<h2 class="text-center text-primary">Gui don nghi phep</h2>
+
+@using (Html.BeginForm("TaoMoi", "NghiPhep", FormMethod.Post, new { @class = "needs-validation" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.LoaiNghi, new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.LoaiNghi, leaveTypes, "-- Chon loai nghi --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LoaiNghi, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.NgayBatDau, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.NgayBatDau, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.NgayBatDau, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.NgayKetThuc, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.NgayKetThuc, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.NgayKetThuc, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="@Url.Action("DanhSachCuaToi", "NghiPhep")" class="btn btn-secondary">Huy</a>
+                <button type="submit" class="btn btn-primary">Gui yeu cau</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

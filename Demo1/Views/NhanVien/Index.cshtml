@@ -1,110 +1,101 @@
-﻿@model IEnumerable<Demo1.Models.NHANVIEN>
+@model PagedList.IPagedList<Demo1.Models.NHANVIEN>
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sach nhan vien";
     Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+
+    Func<string, bool> isBase64String = value =>
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+
+        var trimmed = value.Trim();
+        if (trimmed.Length % 4 != 0)
+        {
+            return false;
+        }
+
+        try
+        {
+            Convert.FromBase64String(trimmed);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    };
+
+    Func<string, string> buildImageSrc = value =>
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return null;
+        }
+
+        return isBase64String(value)
+            ? string.Format("data:image/jpeg;base64,{0}", value)
+            : Url.Content("~/img/" + value);
+    };
 }
 
-<h2 style="text-align:center; color:red">Danh Sách Nhân Viên</h2>
+<h2 class="text-center text-danger">Danh sach nhan vien</h2>
 
 <p>
-    @Html.ActionLink("Thêm mới", "Create")
+    @Html.ActionLink("Them moi", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-striped">
     <tr>
-        <th>
-            Họ Tên
-        </th>
-        <th>
-           Giới Tính
-        </th>
-        <th>
-            Ngày Sinh
-        </th>
-        <th>
-            Hình Ảnh
-        </th>
-        <th>
-            Quên Quán
-        </th>
-        <th>
-            Tạm Trú
-        </th>
-        <th>
-            SĐT
-        </th>
-        <th>
-           Email
-        </th>
-        <th>
-           Dân Tộc
-        </th>
-        <th>
-            Học Vấn
-        </th>
-        <th>
-           Ngày Vào Làm
-        </th>
-        <th>
-            Số căn cước công dân
-        </th>
-        <th>
-            Mã số hợp đồng
-        </th>
+        <th>Ho ten</th>
+        <th>Gioi tinh</th>
+        <th>Ngay sinh</th>
+        <th>Hinh anh</th>
+        <th>Que quan</th>
+        <th>Tam tru</th>
+        <th>SDT</th>
+        <th>Email</th>
+        <th>Dan toc</th>
+        <th>Hoc van</th>
+        <th>Ngay vao lam</th>
+        <th>CCCD</th>
+        <th>MSHD</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
+    var imageSrc = buildImageSrc(item.HINHANH);
     <tr>
+        <td>@Html.DisplayFor(modelItem => item.HOTEN)</td>
+        <td>@Html.DisplayFor(modelItem => item.GIOITINH)</td>
+        <td>@(item.NGAYSINH.HasValue ? item.NGAYSINH.Value.ToString("dd/MM/yyyy") : "")</td>
         <td>
-            @Html.DisplayFor(modelItem => item.HOTEN)
+            @if (!string.IsNullOrEmpty(imageSrc))
+            {
+                <img src="@imageSrc" alt="Anh nhan vien" width="120" height="100" class="img-thumbnail" />
+            }
         </td>
+        <td>@Html.DisplayFor(modelItem => item.QUEQUAN)</td>
+        <td>@Html.DisplayFor(modelItem => item.TAMTRU)</td>
+        <td>@Html.DisplayFor(modelItem => item.SDT)</td>
+        <td>@Html.DisplayFor(modelItem => item.EMAIL)</td>
+        <td>@Html.DisplayFor(modelItem => item.DANTOC)</td>
+        <td>@Html.DisplayFor(modelItem => item.HOCVAN)</td>
+        <td>@(item.NGAYVAOLAM.HasValue ? item.NGAYVAOLAM.Value.ToString("dd/MM/yyyy") : "")</td>
+        <td>@Html.DisplayFor(modelItem => item.CCCD)</td>
+        <td>@Html.DisplayFor(modelItem => item.MSHD)</td>
         <td>
-            @Html.DisplayFor(modelItem => item.GIOITINH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYSINH)
-        </td>
-        <td>
-            <img src="@Url.Content("~/img/" + item.HINHANH)" alt="Hình ảnh nhân viên" width="130" height="110" />
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.QUEQUAN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TAMTRU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMAIL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DANTOC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HOCVAN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYVAOLAM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CCCD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MSHD)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.MSNV }) |
-            @Html.ActionLink("Details", "Details", new { id = item.MSNV }) |
- 
-            @Html.ActionLink("Xóa", "Delete", new { id = item.MSNV }, new { @class = "btn btn-danger" })
-    
-
+            @Html.ActionLink("Chi tiet", "Details", new { id = item.MSNV }, new { @class = "btn btn-link" }) |
+            @Html.ActionLink("Chinh sua", "Edit", new { id = item.MSNV }, new { @class = "btn btn-link" }) |
+            @Html.ActionLink("Xoa", "Delete", new { id = item.MSNV }, new { @class = "btn btn-danger btn-sm" })
         </td>
     </tr>
 }
-
 </table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

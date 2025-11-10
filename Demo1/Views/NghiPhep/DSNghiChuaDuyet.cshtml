@@ -1,76 +1,47 @@
-﻿@model IEnumerable<Demo1.Models.QUANLYNGHIPHEP>
+@model PagedList.IPagedList<Demo1.Models.QUANLYNGHIPHEP>
+@using PagedList.Mvc
 
 @{
-    ViewBag.Title = "DSNghiChuaDuyet";
+    ViewBag.Title = "Don nghi phep cho duyet";
     Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
 }
 
-<h2 style="text-align:center; color:red">Danh Sách Nghỉ Chưa Duyệt</h2>
+<h2 class="text-center text-danger">Don nghi phep dang cho duyet</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NHANVIEN.HOTEN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LOAINGHI)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NGAYBATDAU)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NGAYKETTHUC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SONGAYNGHI)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TRANGTHAI)
-        </th>
-
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NHANVIEN.HOTEN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LOAINGHI)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYBATDAU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYKETTHUC)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SONGAYNGHI)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.TRANGTHAI)*@
-            @if (item.TRANGTHAI.HasValue)
-            {
-                if (item.TRANGTHAI.Value)
-                {
-                    <span style="color:green;">Đã chấp nhận</span>
-                }
-                else
-                {
-                    <span style="color:red;">Chưa xác định</span>
-                }
-            }
-            else
-            {
-                <span style="color:blue;">Đang xử lí</span>
-            }
-        </td>
-
-        <td>
-            @Html.ActionLink("Duyệt", "DuyetNghiPhep", new { id = item.MANP })
-        </td>
-    </tr>
-}
-
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Ma nhan vien</th>
+            <th>Ho ten</th>
+            <th>Loai nghi</th>
+            <th>Ngay bat dau</th>
+            <th>Ngay ket thuc</th>
+            <th>So ngay nghi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MSNV</td>
+            <td>@(item.NHANVIEN != null ? item.NHANVIEN.HOTEN : "")</td>
+            <td>@item.LOAINGHI</td>
+            <td>@(item.NGAYBATDAU.HasValue ? item.NGAYBATDAU.Value.ToString("dd/MM/yyyy") : "")</td>
+            <td>@(item.NGAYKETTHUC.HasValue ? item.NGAYKETTHUC.Value.ToString("dd/MM/yyyy") : "")</td>
+            <td>@(item.SONGAYNGHI ?? 0)</td>
+            <td>
+                @Html.ActionLink("Chi tiet", "ChiTiet", new { id = item.MANP }, new { @class = "btn btn-link" })
+                @Html.ActionLink("Duyet", "DuyetNghiPhep", new { id = item.MANP }, new { @class = "btn btn-success btn-sm" })
+                <span>&nbsp;</span>
+                @Html.ActionLink("Tu choi", "TuChoiNghiPhep", new { id = item.MANP }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+    </tbody>
 </table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("DSNghiChuaDuyet", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+

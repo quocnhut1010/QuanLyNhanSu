@@ -1,0 +1,101 @@
+﻿@model Demo1.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Thong tin nhan vien";
+    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+
+    Func<string, bool> isBase64String = value =>
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+
+        var trimmed = value.Trim();
+        if (trimmed.Length % 4 != 0)
+        {
+            return false;
+        }
+
+        try
+        {
+            Convert.FromBase64String(trimmed);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    };
+
+    Func<string, string> buildImageSrc = value =>
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return null;
+        }
+
+        return isBase64String(value)
+            ? string.Format("data:image/jpeg;base64,{0}", value)
+            : Url.Content("~/img/" + value);
+    };
+}
+
+<h2>Thong tin nhan vien</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        @{ var imageSrc = buildImageSrc(Model.HINHANH); }
+        @if (!string.IsNullOrEmpty(imageSrc))
+        {
+            <div class="mb-3">
+                <img src="@imageSrc" alt="Anh nhan vien" class="img-thumbnail" style="max-width:180px;" />
+            </div>
+        }
+        <dl class="row">
+            <dt class="col-sm-3">Ma nhan vien</dt>
+            <dd class="col-sm-9">@Model.MSNV</dd>
+
+            <dt class="col-sm-3">Ho ten</dt>
+            <dd class="col-sm-9">@Model.HOTEN</dd>
+
+            <dt class="col-sm-3">Gioi tinh</dt>
+            <dd class="col-sm-9">@Model.GIOITINH</dd>
+
+            <dt class="col-sm-3">Ngay sinh</dt>
+            <dd class="col-sm-9">@Model.NGAYSINH?.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Que quan</dt>
+            <dd class="col-sm-9">@Model.QUEQUAN</dd>
+
+            <dt class="col-sm-3">Tam tru</dt>
+            <dd class="col-sm-9">@Model.TAMTRU</dd>
+
+            <dt class="col-sm-3">So dien thoai</dt>
+            <dd class="col-sm-9">@Model.SDT</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.EMAIL</dd>
+
+            <dt class="col-sm-3">Dan toc</dt>
+            <dd class="col-sm-9">@Model.DANTOC</dd>
+
+            <dt class="col-sm-3">Hoc van</dt>
+            <dd class="col-sm-9">@Model.HOCVAN</dd>
+
+            <dt class="col-sm-3">Ngay vao lam</dt>
+            <dd class="col-sm-9">@Model.NGAYVAOLAM?.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">CCCD</dt>
+            <dd class="col-sm-9">@Model.CCCD</dd>
+
+            <dt class="col-sm-3">Ma hop dong</dt>
+            <dd class="col-sm-9">@Model.MSHD</dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Chinh sua", "Edit", new { id = Model.MSNV }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Tro ve danh sach", "Index", null, new { @class = "btn btn-default" })
+</div>

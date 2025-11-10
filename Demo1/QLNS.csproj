@@ -144,11 +144,14 @@
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\TangCaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Services\EmailService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LUONGcs.cs" />
     <Compile Include="LuongThangModel.cs" />
+    <Compile Include="Models\UserProfileEditModel.cs" />
+    <Compile Include="Models\LeaveRequestCreateModel.cs" />
     <Compile Include="Models\ADMIN.cs">
       <DependentUpon>QLNSModel.tt</DependentUpon>
     </Compile>

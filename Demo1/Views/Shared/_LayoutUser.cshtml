@@ -40,7 +40,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="@Url.Action("ThongTin","User")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -66,6 +66,7 @@
                         <h6 class="collapse-header">Thông Tin:</h6>
                         <a class="collapse-item" href="@Url.Action("ChamCong","User")">Chấm công</a>
                         <a class="collapse-item" href="@Url.Action("LichSuTangCa","User")">Tăng ca</a>
+                        <a class="collapse-item" href="@Url.Action("DanhSachCuaToi","NghiPhep")">Nghỉ phép</a>
                     </div>
                 </div>
             </li>
@@ -554,5 +555,6 @@
     <div>
 
     </div>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

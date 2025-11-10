@@ -1,0 +1,87 @@
+﻿@model Demo1.Models.UserProfileEditModel
+
+@{
+    ViewBag.Title = "Chinh sua thong tin";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Chinh sua thong tin ca nhan</h2>
+
+@using (Html.BeginForm("ChinhSua", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MSNV)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MSNV, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" class="form-control" value="@Model.MSNV" disabled="disabled" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HOTEN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" class="form-control" value="@Model.HOTEN" disabled="disabled" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.QUEQUAN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.QUEQUAN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.QUEQUAN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.TAMTRU, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.TAMTRU, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TAMTRU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.SDT, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SDT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.EMAIL, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EMAIL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HOCVAN, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.HOCVAN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.HOCVAN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Anh dai dien</label>
+            <div class="col-md-10">
+                <input type="file" name="file" class="form-control" />
+                <small class="text-muted">Chon anh moi (tuy chon).</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Luu thay doi" class="btn btn-primary" />
+                @Html.ActionLink("Huy", "ThongTin", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}

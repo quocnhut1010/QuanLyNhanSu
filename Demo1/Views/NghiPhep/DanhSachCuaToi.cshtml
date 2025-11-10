@@ -1,8 +1,10 @@
 @model IEnumerable<Demo1.Models.QUANLYNGHIPHEP>
 
 @{
-    ViewBag.Title = "Quan ly nghi phep";
-    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+    ViewBag.Title = "Don nghi phep cua toi";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+    var message = ViewBag.Message as string;
 
     Func<bool?, string> statusText = status =>
     {
@@ -25,13 +27,20 @@
     };
 }
 
-<h2 class="text-center text-danger">Quan ly nghi phep</h2>
+<h2 class="text-center text-primary">Don nghi phep cua toi</h2>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-success">@message</div>
+}
+
+<p>
+    @Html.ActionLink("Gui don nghi phep", "TaoMoi", null, new { @class = "btn btn-primary" })
+</p>
 
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Ma nhan vien</th>
-            <th>Ho ten</th>
             <th>Loai nghi</th>
             <th>Ngay bat dau</th>
             <th>Ngay ket thuc</th>
@@ -44,24 +53,13 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.MSNV</td>
-            <td>@(item.NHANVIEN != null ? item.NHANVIEN.HOTEN : "")</td>
             <td>@item.LOAINGHI</td>
             <td>@(item.NGAYBATDAU.HasValue ? item.NGAYBATDAU.Value.ToString("dd/MM/yyyy") : "")</td>
             <td>@(item.NGAYKETTHUC.HasValue ? item.NGAYKETTHUC.Value.ToString("dd/MM/yyyy") : "")</td>
             <td>@(item.SONGAYNGHI ?? 0)</td>
             <td><span class="@statusClass(item.TRANGTHAI)">@statusText(item.TRANGTHAI)</span></td>
-            <td>
-                @Html.ActionLink("Chi tiet", "ChiTiet", new { id = item.MANP }, new { @class = "btn btn-link" })
-                @if (!item.TRANGTHAI.HasValue)
-                {
-                    @Html.ActionLink("Duyet", "DuyetNghiPhep", new { id = item.MANP }, new { @class = "btn btn-success btn-sm" })
-                    <span>&nbsp;</span>
-                    @Html.ActionLink("Tu choi", "TuChoiNghiPhep", new { id = item.MANP }, new { @class = "btn btn-danger btn-sm" })
-                }
-            </td>
+            <td>@Html.ActionLink("Chi tiet", "ChiTiet", new { id = item.MANP }, new { @class = "btn btn-link" })</td>
         </tr>
     }
     </tbody>
 </table>
-

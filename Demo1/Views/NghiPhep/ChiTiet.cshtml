@@ -1,58 +1,83 @@
-﻿@model Demo1.Models.QUANLYNGHIPHEP
+@model Demo1.Models.QUANLYNGHIPHEP
 
 @{
-    ViewBag.Title = "ChiTiet";
-    Layout = "~/Views/Shared/_LayoutAdmin1.cshtml";
+    var isAdmin = Session["TaikhoanAdmin"] != null;
+    Layout = isAdmin ? "~/Views/Shared/_LayoutAdmin1.cshtml" : "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Chi tiet nghi phep";
+
+    Func<bool?, string> statusText = status =>
+    {
+        if (!status.HasValue)
+        {
+            return "Dang cho duyet";
+        }
+
+        return status.Value ? "Da duyet" : "Tu choi";
+    };
+
+    Func<bool?, string> statusClass = status =>
+    {
+        if (!status.HasValue)
+        {
+            return "badge bg-warning text-dark";
+        }
+
+        return status.Value ? "badge bg-success" : "badge bg-danger";
+    };
 }
 
 <div class="container">
-    <h4 style="text-align:center; color:red">Chi Tiết Nghỉ Phép</h4>
+    <h3 class="text-center text-danger">Chi tiet don nghi phep</h3>
     <hr />
     <table class="table table-bordered">
         <tr>
-            <th>Mã Nhân Viên</th>
-            <td>@Html.DisplayFor(model => model.MSNV)</td>
+            <th>Ma nhan vien</th>
+            <td>@Model.MSNV</td>
         </tr>
         <tr>
-            <th>Họ và Tên</th>
-            <td>@Html.DisplayFor(model => model.NHANVIEN.HOTEN)</td>
+            <th>Ho ten</th>
+            <td>@(Model.NHANVIEN != null ? Model.NHANVIEN.HOTEN : "")</td>
         </tr>
         <tr>
-            <th>Loại Nghỉ</th>
-            <td>@Html.DisplayFor(model => model.LOAINGHI)</td>
+            <th>Loai nghi</th>
+            <td>@Model.LOAINGHI</td>
         </tr>
         <tr>
-            <th>Ngày Bắt Đầu</th>
-            <td>@Html.DisplayFor(model => model.NGAYBATDAU)</td>
+            <th>Ngay bat dau</th>
+            <td>@(Model.NGAYBATDAU.HasValue ? Model.NGAYBATDAU.Value.ToString("dd/MM/yyyy") : "")</td>
         </tr>
         <tr>
-            <th>Ngày Kết Thúc</th>
-            <td>@Html.DisplayFor(model => model.NGAYKETTHUC)</td>
+            <th>Ngay ket thuc</th>
+            <td>@(Model.NGAYKETTHUC.HasValue ? Model.NGAYKETTHUC.Value.ToString("dd/MM/yyyy") : "")</td>
         </tr>
         <tr>
-            <th>Số Ngày Nghỉ</th>
-            <td>@Html.DisplayFor(model => model.SONGAYNGHI)</td>
+            <th>So ngay nghi</th>
+            <td>@(Model.SONGAYNGHI ?? 0)</td>
         </tr>
         <tr>
-            <th>Trạng Thái</th>
-            <td>
-                @Html.DisplayFor(model => model.TRANGTHAI)
-            </td>
+            <th>Trang thai</th>
+            <td><span class="@statusClass(Model.TRANGTHAI)">@statusText(Model.TRANGTHAI)</span></td>
         </tr>
     </table>
+
+    <div class="mb-3">
+        @if (isAdmin && !Model.TRANGTHAI.HasValue)
+        {
+            @Html.ActionLink("Duyet", "DuyetNghiPhep", new { id = Model.MANP }, new { @class = "btn btn-success" })
+            <span>&nbsp;</span>
+            @Html.ActionLink("Tu choi", "TuChoiNghiPhep", new { id = Model.MANP }, new { @class = "btn btn-danger" })
+        }
+    </div>
+
     <p>
-        @Html.ActionLink("Trở lại danh sách", "Index")
+        @if (isAdmin)
+        {
+            @Html.ActionLink("Tro lai danh sach", "Index", null, new { @class = "btn btn-secondary" })
+        }
+        else
+        {
+            @Html.ActionLink("Tro lai danh sach", "DanhSachCuaToi", "NghiPhep", null, new { @class = "btn btn-secondary" })
+        }
     </p>
 </div>
 
-
-@*<style>
-    .table-no-border {
-        border-collapse: collapse;
-    }
-
-        .table-no-border th,
-        .table-no-border td {
-            border: none;
-        }
-</style>*@

@@ -1,57 +1,51 @@
 ﻿@model Demo1.Models.TANGCA
 
 @{
-    ViewBag.Title = "TaoYeuCauTangCa1";
+    ViewBag.Title = "Gui yeu cau tang ca";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var gioBatDauOptions = ViewBag.GioBatDauOptions as System.Collections.Generic.IEnumerable<System.Web.Mvc.SelectListItem> ?? System.Linq.Enumerable.Empty<System.Web.Mvc.SelectListItem>();
+    var gioKetThucOptions = ViewBag.GioKetThucOptions as System.Collections.Generic.IEnumerable<System.Web.Mvc.SelectListItem> ?? System.Linq.Enumerable.Empty<System.Web.Mvc.SelectListItem>();
 }
 
-<h2>Tạo Yêu Cầu Tăng Ca</h2>
+<h2 class="text-center text-primary">Gui yeu cau tang ca</h2>
 
-@using (Html.BeginForm("TaoYeuCauTangCa", "User", FormMethod.Post))
+@using (Html.BeginForm("TaoYeuCauTangCa", "User", FormMethod.Post, new { @class = "needs-validation" }))
 {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MSNV)
 
-        <div class="form-horizontal">
-            <h4>Yêu Cầu Tăng Ca</h4>
-            <hr />
+    <div class="card">
+        <div class="card-body">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.MSNV, "Mã số nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.MSNV, new { @class = "form-control" })
-                </div>
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.MSNV, "Ma so nhan vien", htmlAttributes: new { @class = "form-label" })
+                <input type="text" class="form-control" value="@Model.MSNV" disabled="disabled" />
             </div>
 
-            <div class="form-group">
-                @Html.Label("Giờ bắt đầu", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("gioBatDau", new SelectList(new[] { "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }), "Chọn giờ", new { @class = "form-control" })
-                </div>
+            <div class="form-group mb-3">
+                @Html.Label("Gio bat dau", htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownList("gioBatDau", gioBatDauOptions, "-- Chon gio --", new { @class = "form-control" })
             </div>
 
-            <div class="form-group">
-                @Html.Label("Giờ kết thúc", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("gioKetThuc", new SelectList(new[] { "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }), "Chọn giờ", new { @class = "form-control" })
-                </div>
+            <div class="form-group mb-3">
+                @Html.Label("Gio ket thuc", htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownList("gioKetThuc", gioKetThucOptions, "-- Chon gio --", new { @class = "form-control" })
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.NGAY, "Ngày", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NGAY, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                </div>
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.NGAY, "Ngay", htmlAttributes: new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.NGAY, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Tạo yêu cầu" class="btn btn-default" />
-                </div>
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("Huy", "LichSuTangCa", null, new { @class = "btn btn-secondary" })
+                <button type="submit" class="btn btn-primary">Gui yeu cau</button>
             </div>
         </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
